@@ -11,7 +11,7 @@ module.exports = {
                 secondary: "#b8e3be",
                 danger: "#f50000",
                 background: "#ffffff",
-                card: "#eaf8efcc",
+                card: "#cbcbcb30",
                 title: "#1f1f1f",
                 body: "#353535"
             }

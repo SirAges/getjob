@@ -225,7 +225,7 @@ export default function SearchScreen() {
                            shadow-black shadow-lg bg-card outline-2 w-full
                            text-body"
                         editable={!loading}
-                        placeholderTextColor={"#0039fd88"}
+                        placeholderTextColor={"#53a65e"}
                         placeholder="search for jobs now"
                         onChangeText={text => setSearch(text)}
                         value={search}
@@ -249,7 +249,7 @@ export default function SearchScreen() {
                     <Image
                         className="w-3/4 h-44"
                         style={{ resizeMode: "contain" }}
-                        source={require("../../assets/images/find.jpg")}
+                        source={require("../../assets/images/icon.png")}
                     />
                     <Text className="py-2 font-semibold capitalize text-primary">
                         Start your job search here
@@ -270,7 +270,7 @@ export default function SearchScreen() {
                         rounded-lg my-1 p-2"
                                 >
                                     <View
-                                        className="flex-row items-center
+                                        className="flex-row items-center p-2
                                "
                                     >
                                         <View

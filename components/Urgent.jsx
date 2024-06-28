@@ -2,13 +2,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Toast from "react-native-simple-toast";
-import {
-    View,
-    Text,
-    FlatList,
-    
-    Image
-} from "react-native";
+import { View, Text, FlatList, Image } from "react-native";
 import { Link } from "expo-router";
 export default function Urgent({ jobs }) {
     const urgent = jobs.filter(f => {
@@ -19,8 +13,6 @@ export default function Urgent({ jobs }) {
             differenceInMilliseconds / (1000 * 60 * 60 * 24);
         return differenceInDays < 2;
     });
-
-    
 
     const handleBookmark = async item => {
         // await AsyncStorage.clear();
@@ -55,8 +47,8 @@ export default function Urgent({ jobs }) {
                         className=" max-w-40 w-40 h-fit bg-card
                         rounded-lg mx-1 p-2"
                     >
-                        <View className="flex-row items-start">
-                            <View className="w-7 h-7 rounded-full p-1">
+                        <View className="flex-row items-start space-x-2">
+                            <View className="w-7 h-7 rounded-full bg-card p-1">
                                 <Image
                                     className="rounded-full w-full h-full"
                                     style={{ resizeMode: "contain" }}

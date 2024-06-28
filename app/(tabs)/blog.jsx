@@ -1,4 +1,5 @@
-import { useGetBlogNewsMutation } from "../../redux/blog/blogApiSlice";
+import { useGetBlogNewsQuery } from "../../redux/blog/blogApiSlice";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import {
     View,
     Text,
@@ -13,19 +14,21 @@ import { useState, useEffect } from "react";
 export default function BlogScreen() {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [getBlogNews] = useGetBlogNewsMutation();
+    const { data } = useGetBlogNewsQuery();
+
     useEffect(() => {
         const getNews = async () => {
             setLoading(true);
-            const { data } = await getBlogNews("nigeria");
 
             if (data && data !== undefined) {
                 setBlogs(data?.news);
                 setLoading(false);
             }
         };
-        getNews();
-    }, [getBlogNews]);
+        if (!blogs?.length) {
+            getNews();
+        }
+    }, [data]);
 
     if (loading)
         return (
@@ -35,11 +38,26 @@ export default function BlogScreen() {
                     indeterminate={true}
                     borderWidth={2}
                     showsText={true}
+                    color="#53a65e"
                     useNativeDriver={true}
                 />
             </View>
         );
-
+    if (!blogs?.length) {
+        return (
+            <View className="flex-1 items-center justify-center space-y-2">
+                <Text className="text-primary">
+                    <Ionicons name="newspaper" size={50} />
+                </Text>
+                <Text className="capitalize font-semibold">
+                    No news available now
+                </Text>
+                <Text className="capitalize font-semibold">
+                    Please try again later
+                </Text>
+            </View>
+        );
+    }
     return (
         <SafeAreaView className="flex-1 bg-background">
             <View className=" items-center px-2 pt-2 pb-10">
@@ -47,12 +65,12 @@ export default function BlogScreen() {
 
                 <FlatList
                     className=""
-                    keyExtractor={b => b.date}
+                    keyExtractor={b => b.Url}
                     data={blogs}
                     renderItem={({ item: b }) =>
-                        b.image && (
+                        b.Image && (
                             <TouchableWithoutFeedback
-                                onPress={() => router.push(b.url)}
+                                onPress={() => router.push(b.Url)}
                             >
                                 <View className="bg-card p-2 my-1">
                                     <View className="  space-y-2">
@@ -62,7 +80,7 @@ export default function BlogScreen() {
                                                 style={{
                                                     resizeMode: "cover"
                                                 }}
-                                                source={{ uri: b?.image }}
+                                                source={{ uri: b?.Image }}
                                             />
                                         </View>
 
@@ -70,7 +88,7 @@ export default function BlogScreen() {
                                             className="capitalize
               font-semibold"
                                         >
-                                            {b.title}
+                                            {b.Title}
                                         </Text>
                                     </View>
                                 </View>

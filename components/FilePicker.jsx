@@ -97,8 +97,8 @@ export default function FilePicker({ setValue, watch, id, type, label }) {
                            shadow-black shadow-lg bg-card outline-2 w-full h-52"
                     >
                         <Image
-                            className=" w-full h-full"
-                            style={{ resizeMode: "cover" }}
+                            className=" w-full h-full opacity-20"
+                            style={{ resizeMode: "contain" }}
                             source={
                                 watch(id)
                                     ? { uri: watch(id) }

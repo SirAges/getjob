@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import * as Progress from "react-native-progress";
+import Toast from "react-native-simple-toast";
 import {
     selectCurrentToken,
     setAsyncPersist,
@@ -32,12 +33,14 @@ export default function HomeIndex() {
         try {
             setLoading(true);
             const data = await refresh();
-            return data;
+
+            if (!data?.error) {
+                router.replace("(tabs)");
+            } else {
+                router.replace("auth");
+            }
         } catch (err) {
-            Alert.alert(
-                "Error Message",
-                "An error occured try again\n" + err.message
-            );
+            Toast.show(err.message);
         } finally {
             setLoading(false);
         }
@@ -51,13 +54,7 @@ export default function HomeIndex() {
             router.replace("(tabs)");
         }
         if (persist && !token) {
-            const data = await verifyRefreshToken();
-
-            if (!data.error) {
-                router.replace("(tabs)");
-            } else {
-                router.replace("auth");
-            }
+            verifyRefreshToken();
         }
     };
     return (
@@ -70,15 +67,18 @@ export default function HomeIndex() {
                         borderWidth={2}
                         showsText={true}
                         useNativeDriver={true}
+                        color="#53a65e"
                     />
                 </View>
             )}
-            <View className="relative w-full flex-1 justify-center items-center">
-                <Image
-                    className="w-full h-52"
-                    style={{ resizeMode: "contain" }}
-                    source={require("../assets/images/find.jpg")}
-                />
+            <View className="space-y-4 justify-center items-center flex-1">
+                <View className="relative w-full py-4">
+                    <Image
+                        className="w-full h-52"
+                        style={{ resizeMode: "contain" }}
+                        source={require("../assets/images/find2.jpg")}
+                    />
+                </View>
                 <Text
                     onPress={handleNavigate}
                     className="bg-primary w-fit rounded-full py-4 px-4 text-white

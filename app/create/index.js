@@ -46,7 +46,7 @@ export default function IndexScreen() {
     const [idx, setIdx] = useState(null);
     const [select, setSelect] = useState(false);
     const [selectList, setSelectList] = useState([]);
-    const [addNewJob, { error }] = useAddNewJobMutation();
+    const [addNewJob] = useAddNewJobMutation();
 
     const initialValues = {
         job_title: "",

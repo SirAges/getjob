@@ -251,8 +251,8 @@ export default function JobScreen() {
                         <View className="flex-row items-center px-4">
                             <View className="w-1/2 h-20 p-2 ">
                                 <View
-                                    className="rounded-lg bg-card flex-row h-full
-                    items-center space-x-2"
+                                    className="rounded-lg bg-card flex-row
+                                h-full  items-center space-x-2 p-2"
                                 >
                                     <View
                                         className="items-center justify-center w-7 h-7
@@ -281,7 +281,7 @@ export default function JobScreen() {
                             <View className="w-1/2 h-20 p-2 ">
                                 <View
                                     className="rounded-lg bg-card flex-row
-                    items-center space-x-2 h-full"
+                    items-center space-x-2 h-full p-2"
                                 >
                                     <View
                                         className="items-center justify-center w-7 h-7

@@ -47,7 +47,7 @@ export default function Recommend({ jobs }) {
                         rounded-lg my-1 p-2"
                             >
                                 <View
-                                    className="flex-row items-center
+                                    className="flex-row items-center space-x-2
                                "
                                 >
                                     <View

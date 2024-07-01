@@ -28,7 +28,7 @@ export default function IndexScreen() {
     const [jobs, setJobs] = useState([]);
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(false);
-
+    
     const [list, setList] = useState([]);
     useEffect(() => {
         setLoading(true);
@@ -54,7 +54,7 @@ export default function IndexScreen() {
             return;
         }
     };
-  
+
     return (
         <SafeAreaView className="bg-background w-full flex-1">
             <Header
@@ -97,8 +97,7 @@ export default function IndexScreen() {
                     className=""
                     keyExtractor={({ _id }) => _id}
                     data={list}
-                    renderItem={({ item: l }) => {
-                        const j = l?.data ? l.data.job : l;
+                    renderItem={({ item: j }) => {
                         return (
                             j && (
                                 <TouchableWithoutFeedback

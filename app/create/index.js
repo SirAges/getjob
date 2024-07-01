@@ -59,16 +59,16 @@ export default function IndexScreen() {
         job_course: "",
         job_website: "",
         job_apply_link: "",
-        job_age: "",
+        job_age: "> 18",
         job_salary: 0,
-        job_salary_type: "",
+        job_salary_type: "monthly",
         job_bonus: "",
         job_state: "",
         job_company: "",
         job_company_logo: "",
         job_job_image: "",
-        job_type: "",
-        job_duration: ""
+        job_type: "onsite",
+        job_duration: "full time"
     };
     const schema = z.object({
         job_title: z
@@ -83,18 +83,14 @@ export default function IndexScreen() {
             .number()
             .min(1, { message: "Experience is required" }),
         job_degree: z.string(),
-        job_deadline: z.date({
+        job_deadline: z.string({
             message: "Deadline is required or date is invalid"
         }),
         job_course: z.string(),
-        job_website: z.string().url({ message: "invalid link" }),
+        job_website: z.string(),
         job_apply_link: z.string().refine(
             value => {
-                return (
-                    value.startsWith("http://") ||
-                    value.startsWith("https://") ||
-                    value.startsWith("mailto:")
-                );
+                return value.includes("https://") || value.includes("@");
             },
             {
                 message:
@@ -243,6 +239,7 @@ export default function IndexScreen() {
 
         try {
             const data = await addNewJob(val);
+        
             const pushTokens = socket.on("pushTokens", data => {
                 return data;
             });
@@ -266,7 +263,7 @@ export default function IndexScreen() {
                 handleReset();
                 setLoading(false);
             } else {
-                Toast.show(data?.error?.message);
+                Toast.show(data?.error?.data);
                 setLoading(false);
             }
         } catch (error) {
@@ -513,9 +510,9 @@ export default function IndexScreen() {
                            shadow-black shadow-lg bg-card outline-2 w-full
                            text-body`}
                                                     editable={true}
-                                                    onSubmitEditing={()=>onSubmit(
-                                                        watch()
-                                                    )}
+                                                    onSubmitEditing={() =>
+                                                        onSubmit(watch())
+                                                    }
                                                     returnKeyType="done"
                                                     multiline={multiline}
                                                     numberOfLines={

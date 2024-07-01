@@ -24,7 +24,7 @@ export default function Select({
     
     const handleSelect = () => {
         setIdx(id);
-        setSelectList(list);
+        setSelectList(list.sort());
         setSelect(true);
     };
 

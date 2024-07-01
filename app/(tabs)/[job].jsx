@@ -57,7 +57,7 @@ export default function JobScreen() {
 
             Toast.show(data?.error ? data.error.data : data.data);
             if (!data?.error) {
-                if (job_apply_link.startsWith("mailto:")) {
+                if (job_apply_link.includes("@")) {
                     router.push(
                         `${job_apply_link}?subject=Application%20for%20the%20Position%20of%20${job_title.replace(
                             " ",
@@ -84,6 +84,7 @@ export default function JobScreen() {
                     borderWidth={2}
                     showsText={true}
                     useNativeDriver={true}
+                    color="#53a65e"
                 />
             </View>
         );
@@ -99,6 +100,7 @@ export default function JobScreen() {
                             borderWidth={2}
                             showsText={true}
                             useNativeDriver={true}
+                            color="#53a65e"
                         />
                     </View>
                 )}
@@ -111,12 +113,6 @@ export default function JobScreen() {
                 text-lg"
                     >
                         {job_company}
-                    </Text>
-                    <Text
-                        className="bg-card p-1
-                 rounded-full"
-                    >
-                        <Ionicons name="notifications-outline" size={24} />
                     </Text>
                 </View>
 

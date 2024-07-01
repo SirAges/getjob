@@ -171,6 +171,7 @@ export default function IndexScreen() {
             city,
             skills,
             degree,
+            course,
             age,
             image
         } = formData;
@@ -208,6 +209,7 @@ export default function IndexScreen() {
                 city &&
                 skills &&
                 degree &&
+                course &&
                 age,
             cv:
                 email &&
@@ -221,6 +223,7 @@ export default function IndexScreen() {
                 city &&
                 skills &&
                 degree &&
+                course &&
                 age &&
                 cv &&
                 image
@@ -275,7 +278,7 @@ export default function IndexScreen() {
                 const data = await signup(val);
 
                 if (!data?.error) {
-                    router.replace("(tabs)");
+                    setIsLoginMode(true);
                 }
                 Toast.show(data?.error ? data?.error?.data : data?.data);
                 setLoading(false);
@@ -366,7 +369,7 @@ export default function IndexScreen() {
                 } else {
                     Toast.show(data.error.data);
                     setLoading(false);
-                    console.log("first", data);
+                
                 }
             }
         } catch (error) {
@@ -576,6 +579,21 @@ export default function IndexScreen() {
                                         ]}
                                         watch={watch}
                                     />
+                                ) : id === "degree" ? (
+                                    <Highlight
+                                        id={id}
+                                        handleInput={handleInput}
+                                        watch={watch}
+                                        label={label}
+                                        list={[
+                                            "nd",
+                                            "hnd",
+                                            "bsc",
+                                            "msc",
+                                            "phd",
+                                            "prof"
+                                        ]}
+                                    />
                                 ) : id === "cv" ? (
                                     <FilePicker
                                         key={id}
@@ -618,24 +636,7 @@ export default function IndexScreen() {
                                                 >
                                                     {label}
                                                 </Text>
-                                                {id === "degree" && (
-                                                    <Highlight
-                                                        id={id}
-                                                        handleInput={
-                                                            handleInput
-                                                        }
-                                                        watch={watch}
-                                                        label={label}
-                                                        list={[
-                                                            "nd",
-                                                            "hnd",
-                                                            "bsc",
-                                                            "msc",
-                                                            "phd",
-                                                            "prof"
-                                                        ]}
-                                                    />
-                                                )}
+
                                                 <TextInput
                                                     className="px-4 py-4  rounded-full shadow
                            shadow-black shadow-lg bg-card outline-2 w-full
@@ -750,15 +751,17 @@ export default function IndexScreen() {
                         </Text>
                     </View>
 
-                    <Text
-                        className="px-4 py-4  rounded-full shadow
+                    
+                        <Text
+                            className="px-4 py-4  rounded-full shadow
                            shadow-black shadow-lg bg-primary w-full text-center
                            capitalize font-semibold
                            text-white"
-                        onPress={handleSubmit(onSubmit)}
-                    >
-                        {isLoginMode ? "Login" : "Sign up"}
-                    </Text>
+                            onPress={loading?null:handleSubmit(onSubmit)}
+                        >
+                            {isLoginMode ? "Login" : "Sign up"}
+                        </Text>
+                    
                 </View>
             </ScrollView>
             <Modal

@@ -177,7 +177,7 @@ export default function ProfileScreen() {
 
     const handleEdit = async () => {
         setLoading(true);
-        
+
         try {
             const data = await updateUser({
                 [edit.key]: edit.value,
@@ -236,7 +236,7 @@ export default function ProfileScreen() {
                                     indeterminate={true}
                                     borderWidth={2}
                                     showsText={true}
-                                    useNativeDriver={true}
+                               color="#53a65e"     useNativeDriver={true}
                                 />
                             </View>
                         )}
@@ -487,7 +487,7 @@ export default function ProfileScreen() {
                                     onSubmitEditing={handleOtp}
                                     returnKeyType="send"
                                     editable={!loading}
-                                    placeholderTextColor={"#0039fd88"}
+                                    placeholderTextColor={"#53a65e"}
                                     placeholder="Your One Time Password"
                                     onChangeText={text => setInputOtp(text)}
                                     value={inputOtp}
@@ -519,7 +519,7 @@ export default function ProfileScreen() {
                                             onSubmitEditing={handleEdit}
                                             returnKeyType="send"
                                             editable={!loading}
-                                            placeholderTextColor={"#0039fd88"}
+                                            placeholderTextColor={"#53a65e"}
                                             placeholder={edit.title}
                                             onChangeText={text =>
                                                 setEdit(prev => ({

@@ -25,7 +25,7 @@ export default function Header({ user, setList, setModal, setIdx, idx }) {
             Toast.show("No notifications");
         }
     };
-    const handleBok = async clicked => {
+    const handleBok = async () => {
         // await AsyncStorage.clear();
         setIdx("bk");
         const bkres = await AsyncStorage.getItem("gbbk");
@@ -49,7 +49,7 @@ export default function Header({ user, setList, setModal, setIdx, idx }) {
             >
                 <Image
                     className="w-8 h-8 rounded-full"
-                    style={{ resizeMode: "contain" }}
+                    style={{ resizeMode: "cover" }}
                     source={{ uri: image }}
                 />
             </View>
@@ -58,7 +58,7 @@ export default function Header({ user, setList, setModal, setIdx, idx }) {
                 <Text className="capitalize text-body text-xs">{`${prefered_job},${state}`}</Text>
             </View>
             <View className="flex-row space-x-3 items-center">
-                {isAdmin && isCreator && (
+                {(isAdmin || isCreator) && (
                     <Text
                         onPress={() => router.push("/create")}
                         className="text-primary"

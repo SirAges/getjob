@@ -31,7 +31,9 @@ export default function Urgent({ jobs }) {
         AsyncStorage.setItem("gbbk", JSON.stringify(newBks));
         Toast.show("book marked");
     };
-
+  if (!urgent?.length) {
+        return null;
+    }
     return (
         <View className="px-2">
             <Text className="px-4 my-1 font-semibold w-full text-start text-md">

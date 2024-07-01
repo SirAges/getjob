@@ -29,7 +29,9 @@ export default function Recommend({ jobs }) {
         AsyncStorage.setItem("gbbk", JSON.stringify(newBks));
         Toast.show("book marked");
     };
-
+if(!jobs?.length){
+  return null
+}
     return (
         <View className="px-4 flex-1">
             <Text className="px-4 my-1 font-semibold text-md">Recommended</Text>
@@ -56,8 +58,12 @@ export default function Recommend({ jobs }) {
                                     >
                                         <Image
                                             className="rounded-md w-10 h-10"
-                                            style={{ resizeMode: "contain" }}
-                                            source={{ uri: j.job_company_logo }}
+                                            style={{
+                                                resizeMode: "contain"
+                                            }}
+                                            source={{
+                                                uri: j.job_company_logo
+                                            }}
                                         />
                                     </View>
                                     <View className="flex-1">

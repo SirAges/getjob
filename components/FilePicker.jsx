@@ -25,8 +25,16 @@ export default function FilePicker({ setValue, watch, id, type, label }) {
         for (const asset of assets) {
             try {
                 setLoading(true);
-                const { name, mimeType, uri } = asset;
+                const { name, mimeType, uri, size } = asset;
 
+                const sized = Number((size / 1000000).toFixed(2));
+                if (sized > 5) {
+                    Toast.show(
+                        "file too large; file must not be less than 5mb"
+                    );
+                    setLoading(false)
+                    return;
+                }
                 const apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
 
                 const formData = new FormData();
@@ -71,6 +79,7 @@ export default function FilePicker({ setValue, watch, id, type, label }) {
                 borderWidth={2}
                 showsText={true}
                 useNativeDriver={true}
+                color="#53a65e"
             />
         </View>
     ) : (
@@ -93,11 +102,12 @@ export default function FilePicker({ setValue, watch, id, type, label }) {
                     </Text>
                 ) : id !== "image" || id !== "job_company_logo" ? (
                     <View
-                        className="relative  py-3  p-2 shadow my-2
-                           shadow-black shadow-lg bg-card outline-2 w-full h-52"
+                        className={`relative  py-3  p-2 shadow my-2
+                           shadow-black shadow-lg bg-card outline-2 w-full h-52
+                           ${watch(id) ? "" : "opacity-20"}`}
                     >
                         <Image
-                            className=" w-full h-full opacity-20"
+                            className=" w-full h-full "
                             style={{ resizeMode: "contain" }}
                             source={
                                 watch(id)
